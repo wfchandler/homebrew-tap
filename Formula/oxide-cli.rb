@@ -1,20 +1,20 @@
 class OxideCli < Formula
   desc "CLI for the Oxide rack"
   homepage "https://github.com/wfchandler/oxide.rs"
-  version "0.99.0+20250704.0.1"
+  version "0.99.0+20250704.0.2"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/wfchandler/oxide.rs/releases/download/v0.99.0+20250704.0.1/oxide-cli-aarch64-apple-darwin.tar.xz"
-      sha256 "0f732a18baea813a404d5c7d08428c4eafd0b826382cc27936f65c810cbdbdd7"
+      url "https://github.com/wfchandler/oxide.rs/releases/download/v0.99.0+20250704.0.2/oxide-cli-aarch64-apple-darwin.tar.xz"
+      sha256 "722772900d1bf5412f5df622882ad0f3a56510f22bedc4b31cfbe4780715fbba"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/wfchandler/oxide.rs/releases/download/v0.99.0+20250704.0.1/oxide-cli-x86_64-apple-darwin.tar.xz"
-      sha256 "5e191b4669260fb7d71c0633eb91dffd7aa57a9e369f1880a7b3c5fb559a777e"
+      url "https://github.com/wfchandler/oxide.rs/releases/download/v0.99.0+20250704.0.2/oxide-cli-x86_64-apple-darwin.tar.xz"
+      sha256 "61c023a5a6154fd0055e7f2936410fc1b04cb1bc08af74bdf13e06d96c83b5b1"
     end
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/wfchandler/oxide.rs/releases/download/v0.99.0+20250704.0.1/oxide-cli-x86_64-unknown-linux-gnu.tar.xz"
-    sha256 "e2603c55119d56e03f40ce54cc2e0318757f491147bced81014314cdf99a4819"
+    url "https://github.com/wfchandler/oxide.rs/releases/download/v0.99.0+20250704.0.2/oxide-cli-x86_64-unknown-linux-gnu.tar.xz"
+    sha256 "c5981391c97e74d0fc176c562e14a72c33dcd246ba18ee5786a15ec6cff0ba61"
   end
   license "MPL-2.0"
 
@@ -48,8 +48,12 @@ class OxideCli < Formula
     bin.install "oxide" if OS.linux? && Hardware::CPU.intel?
 
     install_binary_aliases!
-    generate_completions_from_executable(bin/"oxide",
-                                          "completion", shell_parameter_format: :arg, shells: [:bash, :fish, :pwsh, :zsh])
+    generate_completions_from_executable(
+      bin/"oxide",
+      "completion",
+      shell_parameter_format: :arg,
+      shells:                 [:bash, :fish, :pwsh, :zsh],
+    )
 
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
